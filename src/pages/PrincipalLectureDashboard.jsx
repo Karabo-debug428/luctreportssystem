@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// --- Backend URL ---
+const BACKEND_URL = "https://luctreportssystem-1a43-git-main-karabotlalis-projects.vercel.app";
+
 const PrincipalLectureDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Courses");
@@ -29,7 +32,7 @@ const PrincipalLectureDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/lecturer_reports", {
+        const res = await fetch(`${BACKEND_URL}/lecturer_reports`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch reports");
@@ -53,7 +56,7 @@ const PrincipalLectureDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/lecturer_reports", {
+        const res = await fetch(`${BACKEND_URL}/lecturer_reports`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch courses");
@@ -80,7 +83,7 @@ const PrincipalLectureDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/lecturer_reports", {
+        const res = await fetch(`${BACKEND_URL}/lecturer_reports`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch classes");
@@ -107,7 +110,7 @@ const PrincipalLectureDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/student_ratings", {
+        const res = await fetch(`${BACKEND_URL}/student_ratings`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch ratings");
@@ -132,7 +135,7 @@ const PrincipalLectureDashboard = () => {
       setSaving(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:5000/lecturer_feedback/${report.id}`, {
+        const res = await fetch(`${BACKEND_URL}/lecturer_feedback/${report.id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -186,9 +189,7 @@ const PrincipalLectureDashboard = () => {
             {error && <p style={{ color: "red" }}>{error}</p>}
             {!loadingCourses && !error && (
               <table className="table table-dark table-striped">
-                <thead>
-                  <tr><th>Lecturer</th><th>Course</th></tr>
-                </thead>
+                <thead><tr><th>Lecturer</th><th>Course</th></tr></thead>
                 <tbody>
                   {courses.length === 0 ? (
                     <tr><td colSpan="2">No courses found</td></tr>
@@ -302,3 +303,4 @@ const styles = {
 };
 
 export default PrincipalLectureDashboard;
+

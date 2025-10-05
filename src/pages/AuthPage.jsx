@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 
+// Set your backend URL here
+const BACKEND_URL = "https://luctreportssystem-1a43-git-main-karabotlalis-projects.vercel.app";
+
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [role, setRole] = useState("");
@@ -38,9 +41,7 @@ function AuthPage() {
     if (!isLogin) data.role = role;
 
     try {
-      const url = isLogin
-        ? "http://localhost:5000/login"
-        : "http://localhost:5000/register";
+      const url = isLogin ? `${BACKEND_URL}/login` : `${BACKEND_URL}/register`;
 
       const res = await fetch(url, {
         method: "POST",

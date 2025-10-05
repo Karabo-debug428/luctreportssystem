@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+const BACKEND_URL = "https://luctreportssystem-1a43-git-main-karabotlalis-projects.vercel.app";
+
 const ProgramManagerDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Courses");
@@ -33,7 +35,7 @@ const ProgramManagerDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/lecturer_reports", {
+        const res = await fetch(`${BACKEND_URL}/lecturer_reports`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -56,7 +58,7 @@ const ProgramManagerDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/lecturer_reports", {
+        const res = await fetch(`${BACKEND_URL}/lecturer_reports`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -87,7 +89,7 @@ const ProgramManagerDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/lecturer_reports", {
+        const res = await fetch(`${BACKEND_URL}/lecturer_reports`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -113,7 +115,7 @@ const ProgramManagerDashboard = () => {
       setError("");
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/student_ratings", {
+        const res = await fetch(`${BACKEND_URL}/student_ratings`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -138,7 +140,7 @@ const ProgramManagerDashboard = () => {
       setSaving(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:5000/lecturer_feedback/${report.id}`, {
+        const res = await fetch(`${BACKEND_URL}/lecturer_feedback/${report.id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -193,7 +195,7 @@ const ProgramManagerDashboard = () => {
     }
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/assign_course", {
+      const res = await fetch(`${BACKEND_URL}/assign_course`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -355,7 +357,7 @@ const ProgramManagerDashboard = () => {
           >
             {tab === "Courses" ? "📚 Courses" :
              tab === "Reports" ? "📝 Reports" :
-             tab === "Lectures" ? "👨‍🏫 Lectures" :
+             tab === "Lectures" ? "👨‍🏫 Lecturers" :
              tab === "Monitoring" ? "📊 Monitoring" :
              tab === "Rating" ? "⭐ Rating" : "🏫 Classes"}
           </span>
